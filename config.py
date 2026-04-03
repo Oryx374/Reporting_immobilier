@@ -29,6 +29,10 @@ if HTTP_PROXY:
 if HTTPS_PROXY:
     PROXIES["https"] = HTTPS_PROXY
 
+# --- Identifiants premium (CFNEWS Immo & Business Immo) ---
+PREMIUM_EMAIL = os.getenv("PREMIUM_EMAIL", "")
+PREMIUM_PASSWORD = os.getenv("PREMIUM_PASSWORD", "")
+
 # --- Scrapers ---
 # Nombre max d'articles à récupérer par source
 MAX_ARTICLES_PER_SOURCE = int(os.getenv("MAX_ARTICLES_PER_SOURCE", 20))

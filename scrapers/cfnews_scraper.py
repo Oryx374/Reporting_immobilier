@@ -26,6 +26,9 @@ class CFNewsScraper(BaseScraper):
     SOURCE_NAME = "CFNEWS Immo"
     BASE_URL = "https://www.cfnews.net"
 
+    LOGIN_URL = "https://www.cfnews.net/login"
+    LOGIN_CHECK_TEXT = "Mon compte"  # texte présent dans le HTML si connecté
+
     # CFNEWS expose plusieurs flux RSS par thématique
     RSS_URLS = [
         "https://www.cfnews.net/rss/immo",

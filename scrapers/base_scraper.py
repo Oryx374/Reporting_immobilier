@@ -25,7 +25,7 @@ except ImportError:
 import requests
 from bs4 import BeautifulSoup
 
-from config import BROWSER_HEADERS, MAX_ARTICLES_PER_SOURCE, PROXIES, REQUEST_DELAY
+from config import BROWSER_HEADERS, MAX_ARTICLES_PER_SOURCE, PREMIUM_EMAIL, PREMIUM_PASSWORD, PROXIES, REQUEST_DELAY
 
 logger = logging.getLogger(__name__)
 
@@ -59,12 +59,59 @@ class BaseScraper:
     RSS_URLS: list[str] = []
     BASE_URL = ""
 
+    # URL de login à surcharger dans chaque scraper
+    LOGIN_URL: Optional[str] = None
+    LOGIN_CHECK_TEXT: str = ""  # texte présent sur la page si connecté
+
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update(BROWSER_HEADERS)
         if PROXIES:
             self.session.proxies.update(PROXIES)
         self.articles: list[Article] = []
+        self._logged_in = False
+
+        if PREMIUM_EMAIL and PREMIUM_PASSWORD and self.LOGIN_URL:
+            self._login()
+
+    # ------------------------------------------------------------------
+    # Authentification premium
+    # ------------------------------------------------------------------
+
+    def _login(self) -> bool:
+        """Tente de se connecter au site avec les identifiants premium."""
+        try:
+            logger.info(f"[{self.SOURCE_NAME}] Connexion premium ({PREMIUM_EMAIL})...")
+            payload = self._login_payload()
+            resp = self.session.post(self.LOGIN_URL, data=payload, timeout=20, allow_redirects=True)
+            if resp.status_code in (200, 302):
+                if self.LOGIN_CHECK_TEXT and self.LOGIN_CHECK_TEXT in resp.text:
+                    self._logged_in = True
+                    logger.info(f"[{self.SOURCE_NAME}] Connecté en premium.")
+                    return True
+                elif not self.LOGIN_CHECK_TEXT:
+                    # Sans texte de vérification, on suppose succès si pas d'erreur
+                    self._logged_in = True
+                    logger.info(f"[{self.SOURCE_NAME}] Login envoyé (vérification manuelle recommandée).")
+                    return True
+            logger.warning(f"[{self.SOURCE_NAME}] Login échoué (status {resp.status_code}).")
+        except Exception as e:
+            logger.warning(f"[{self.SOURCE_NAME}] Erreur login : {e}")
+        return False
+
+    def _login_payload(self) -> dict:
+        """Payload POST de login — à surcharger si le site a des champs spécifiques."""
+        return {
+            "email": PREMIUM_EMAIL,
+            "password": PREMIUM_PASSWORD,
+            "username": PREMIUM_EMAIL,
+            "login": PREMIUM_EMAIL,
+            "pass": PREMIUM_PASSWORD,
+        }
+
+    def _login_playwright(self, page) -> bool:
+        """Login via Playwright pour les sites avec formulaire JS."""
+        return False  # à surcharger dans chaque scraper si besoin
 
     # ------------------------------------------------------------------
     # Méthode principale

@@ -26,6 +26,9 @@ class BusinessImmoScraper(BaseScraper):
     SOURCE_NAME = "Business Immo"
     BASE_URL = "https://www.businessimmo.com"
 
+    LOGIN_URL = "https://www.businessimmo.com/login"
+    LOGIN_CHECK_TEXT = "Mon compte"  # texte présent dans le HTML si connecté
+
     # Business Immo publie des flux RSS par catégorie d'actif
     RSS_URLS = [
         # Flux principaux
