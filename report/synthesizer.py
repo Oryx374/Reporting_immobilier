@@ -1,16 +1,18 @@
 """
-Utilise l'API Claude pour synthétiser les articles scrapés en un rapport
-structuré pour un professionnel de la structuration de club deals immobiliers.
+Synthétise les articles scrapés en un rapport structuré pour un professionnel
+de la structuration de club deals immobiliers.
+
+Ordre de priorité des moteurs IA :
+  1. Google Gemini Flash (gratuit, quota généreux) — si GEMINI_API_KEY définie
+  2. Claude Opus (Anthropic, payant) — si ANTHROPIC_API_KEY définie
+  3. Fallback sans IA — liste brute des articles
 """
 
 from __future__ import annotations
 
 import logging
-from typing import Optional
 
-import anthropic
-
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, GEMINI_API_KEY
 from scrapers.base_scraper import Article
 
 logger = logging.getLogger(__name__)
@@ -68,20 +70,12 @@ une vraie valeur analytique."""
 
 
 class ReportSynthesizer:
-    """Synthétise les articles via Claude pour produire un rapport structuré."""
-
-    def __init__(self):
-        if not ANTHROPIC_API_KEY:
-            logger.warning("ANTHROPIC_API_KEY non définie. La synthèse IA sera désactivée.")
-        self.client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+    """
+    Synthétise les articles via Gemini (gratuit) ou Claude (payant).
+    Détection automatique de la clé disponible.
+    """
 
     def synthesize(self, articles: list[Article]) -> dict:
-        """
-        Retourne un dict avec :
-          - 'ai_report': le rapport rédigé par Claude (str)
-          - 'articles': la liste des articles bruts
-          - 'article_count': nombre d'articles
-        """
         if not articles:
             return {
                 "ai_report": "Aucun article collecté cette semaine.",
@@ -90,13 +84,84 @@ class ReportSynthesizer:
             }
 
         articles_text = self._format_articles_for_prompt(articles)
-        ai_report = self._call_claude(articles_text, len(articles))
+        prompt = ANALYSIS_PROMPT_TEMPLATE.format(
+            count=len(articles),
+            articles_text=articles_text,
+        )
+
+        if GEMINI_API_KEY:
+            logger.info("Moteur IA : Google Gemini Flash (gratuit)")
+            ai_report = self._call_gemini(prompt)
+        elif ANTHROPIC_API_KEY:
+            logger.info("Moteur IA : Claude Opus (Anthropic)")
+            ai_report = self._call_claude(prompt)
+        else:
+            logger.warning("Aucune clé IA configurée — rapport sans synthèse.")
+            ai_report = self._fallback_report(articles_text)
 
         return {
             "ai_report": ai_report,
             "articles": [a.to_dict() for a in articles],
             "article_count": len(articles),
         }
+
+    # ------------------------------------------------------------------
+    # Moteur 1 : Google Gemini Flash (gratuit)
+    # ------------------------------------------------------------------
+
+    def _call_gemini(self, prompt: str) -> str:
+        try:
+            import google.generativeai as genai
+
+            genai.configure(api_key=GEMINI_API_KEY)
+            model = genai.GenerativeModel(
+                model_name="gemini-1.5-flash",
+                system_instruction=SYSTEM_PROMPT,
+            )
+            response = model.generate_content(prompt)
+            return response.text
+        except Exception as e:
+            logger.error(f"Erreur Gemini : {e}")
+            # Bascule sur Claude si disponible
+            if ANTHROPIC_API_KEY:
+                logger.info("Bascule sur Claude suite à erreur Gemini.")
+                return self._call_claude(prompt)
+            return self._fallback_report("")
+
+    # ------------------------------------------------------------------
+    # Moteur 2 : Claude Opus (Anthropic)
+    # ------------------------------------------------------------------
+
+    def _call_claude(self, prompt: str) -> str:
+        try:
+            import anthropic
+
+            client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+            message = client.messages.create(
+                model="claude-opus-4-6",
+                max_tokens=4096,
+                system=SYSTEM_PROMPT,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return message.content[0].text
+        except Exception as e:
+            logger.error(f"Erreur Claude : {e}")
+            return self._fallback_report("")
+
+    # ------------------------------------------------------------------
+    # Fallback : aucune IA
+    # ------------------------------------------------------------------
+
+    def _fallback_report(self, articles_text: str) -> str:
+        return (
+            "Synthèse IA indisponible (aucune clé API configurée).\n\n"
+            "**Articles collectés cette semaine :**\n\n"
+            + articles_text
+        )
+
+    # ------------------------------------------------------------------
+    # Helpers
+    # ------------------------------------------------------------------
 
     def _format_articles_for_prompt(self, articles: list[Article]) -> str:
         lines = []
@@ -112,31 +177,3 @@ class ReportSynthesizer:
             lines.append(f"**Lien :** {a.url}")
             lines.append("")
         return "\n".join(lines)
-
-    def _call_claude(self, articles_text: str, count: int) -> str:
-        if not self.client:
-            return self._fallback_report(articles_text)
-
-        try:
-            prompt = ANALYSIS_PROMPT_TEMPLATE.format(
-                count=count,
-                articles_text=articles_text,
-            )
-            message = self.client.messages.create(
-                model="claude-opus-4-6",
-                max_tokens=4096,
-                system=SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            return message.content[0].text
-        except anthropic.APIError as e:
-            logger.error(f"Erreur API Claude : {e}")
-            return self._fallback_report(articles_text)
-
-    def _fallback_report(self, articles_text: str) -> str:
-        """Rapport de secours sans IA (liste brute des articles)."""
-        return (
-            "⚠️ Synthèse IA indisponible (clé API manquante ou erreur).\n\n"
-            "**Articles collectés cette semaine :**\n\n"
-            + articles_text
-        )

@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Claude API ---
+# --- IA : Gemini (gratuit) ou Claude (payant) ---
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 
 # --- Email ---
