@@ -378,8 +378,12 @@ class BaseScraper:
         """À surcharger dans chaque scraper spécifique si besoin."""
         return []
 
-    def _get_playwright_html(self, url: str) -> Optional[BeautifulSoup]:
-        """Lance un vrai navigateur Chromium pour récupérer la page."""
+    def _get_playwright_html(self, url: str, login_url: Optional[str] = None) -> Optional[BeautifulSoup]:
+        """
+        Lance un vrai navigateur Chromium pour récupérer la page.
+        Si login_url est fourni et que les identifiants premium sont configurés,
+        effectue le login automatique avant de naviguer vers url.
+        """
         try:
             from playwright.sync_api import sync_playwright
 
@@ -395,15 +399,17 @@ class BaseScraper:
                     user_agent=BROWSER_HEADERS["User-Agent"],
                     locale="fr-FR",
                     viewport={"width": 1280, "height": 800},
-                    extra_http_headers={
-                        "Accept-Language": "fr-FR,fr;q=0.9",
-                    },
+                    extra_http_headers={"Accept-Language": "fr-FR,fr;q=0.9"},
                 )
-                # Masque le webdriver pour paraître comme un vrai navigateur
                 context.add_init_script(
                     "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
                 )
                 page = context.new_page()
+
+                # Login automatique si identifiants disponibles
+                if login_url and PREMIUM_EMAIL and PREMIUM_PASSWORD:
+                    self._playwright_login(page, login_url)
+
                 page.goto(url, wait_until="domcontentloaded", timeout=30000)
                 time.sleep(2)
                 html = page.content()
@@ -412,3 +418,73 @@ class BaseScraper:
         except Exception as e:
             logger.debug(f"Playwright {url} erreur : {e}")
             return None
+
+    def _playwright_login(self, page, login_url: str) -> bool:
+        """
+        Login automatique via Playwright.
+        Détecte les champs email/password du formulaire et les remplit.
+        """
+        try:
+            logger.info(f"[{self.SOURCE_NAME}] Login Playwright sur {login_url}...")
+            page.goto(login_url, wait_until="domcontentloaded", timeout=20000)
+            time.sleep(1)
+
+            # Cherche le champ email (plusieurs noms possibles)
+            email_selectors = [
+                'input[type="email"]',
+                'input[name="email"]',
+                'input[name="login"]',
+                'input[name="username"]',
+                'input[id*="email"]',
+                'input[id*="login"]',
+            ]
+            password_selectors = [
+                'input[type="password"]',
+                'input[name="password"]',
+                'input[name="pass"]',
+                'input[id*="password"]',
+                'input[id*="pass"]',
+            ]
+            submit_selectors = [
+                'button[type="submit"]',
+                'input[type="submit"]',
+                'button:has-text("Connexion")',
+                'button:has-text("Se connecter")',
+                'button:has-text("Login")',
+                '.btn-login',
+                '.submit',
+            ]
+
+            # Remplir l'email
+            for sel in email_selectors:
+                try:
+                    if page.locator(sel).count() > 0:
+                        page.fill(sel, PREMIUM_EMAIL)
+                        break
+                except Exception:
+                    continue
+
+            # Remplir le mot de passe
+            for sel in password_selectors:
+                try:
+                    if page.locator(sel).count() > 0:
+                        page.fill(sel, PREMIUM_PASSWORD)
+                        break
+                except Exception:
+                    continue
+
+            # Soumettre
+            for sel in submit_selectors:
+                try:
+                    if page.locator(sel).count() > 0:
+                        page.click(sel)
+                        page.wait_for_load_state("domcontentloaded", timeout=10000)
+                        time.sleep(1)
+                        logger.info(f"[{self.SOURCE_NAME}] Login Playwright effectué.")
+                        return True
+                except Exception:
+                    continue
+
+        except Exception as e:
+            logger.debug(f"Playwright login erreur : {e}")
+        return False

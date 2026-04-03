@@ -150,12 +150,12 @@ class CFNewsScraper(BaseScraper):
         )
 
     # ------------------------------------------------------------------
-    # Stratégie 3 : Playwright
+    # Stratégie 3 : Playwright avec login automatique
     # ------------------------------------------------------------------
 
     def _fetch_playwright(self) -> list[Article]:
         for url in self.LISTING_URLS:
-            soup = self._get_playwright_html(url)
+            soup = self._get_playwright_html(url, login_url="https://www.cfnewsimmo.net/login")
             if soup:
                 articles = self._parse_listing(soup, url)
                 if articles:
