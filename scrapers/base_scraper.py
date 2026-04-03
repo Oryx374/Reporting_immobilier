@@ -25,7 +25,7 @@ except ImportError:
 import requests
 from bs4 import BeautifulSoup
 
-from config import BROWSER_HEADERS, MAX_ARTICLES_PER_SOURCE, PREMIUM_EMAIL, PREMIUM_PASSWORD, PROXIES, REQUEST_DELAY
+from config import BROWSER_HEADERS, COOKIES_FILE, MAX_ARTICLES_PER_SOURCE, PREMIUM_EMAIL, PREMIUM_PASSWORD, PROXIES, REQUEST_DELAY
 
 logger = logging.getLogger(__name__)
 
@@ -71,8 +71,65 @@ class BaseScraper:
         self.articles: list[Article] = []
         self._logged_in = False
 
+        # Priorité 1 : cookies exportés depuis le navigateur (méthode la plus fiable)
+        if COOKIES_FILE:
+            loaded = self._load_cookies_from_file(COOKIES_FILE)
+            if loaded:
+                self._logged_in = True
+                return
+
+        # Priorité 2 : login automatique avec identifiants
         if PREMIUM_EMAIL and PREMIUM_PASSWORD and self.LOGIN_URL:
             self._login()
+
+    # ------------------------------------------------------------------
+    # Chargement des cookies depuis le navigateur
+    # ------------------------------------------------------------------
+
+    def _load_cookies_from_file(self, filepath: str) -> bool:
+        """
+        Charge les cookies depuis un fichier JSON exporté par l'extension
+        'Cookie-Editor' (Chrome/Firefox).
+
+        Format attendu : liste de dicts avec les champs 'name', 'value', 'domain'.
+        """
+        import json, os
+        if not os.path.exists(filepath):
+            logger.warning(f"Fichier cookies introuvable : {filepath}")
+            return False
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                cookies = json.load(f)
+
+            # Supporte deux formats : liste directe ou dict avec clé 'cookies'
+            if isinstance(cookies, dict) and "cookies" in cookies:
+                cookies = cookies["cookies"]
+
+            count = 0
+            for c in cookies:
+                name = c.get("name", "")
+                value = c.get("value", "")
+                domain = c.get("domain", "")
+                if not name or not value:
+                    continue
+                # On ne charge que les cookies des domaines cibles
+                if any(d in domain for d in ["cfnews", "businessimmo"]):
+                    self.session.cookies.set(name, value, domain=domain)
+                    count += 1
+
+            if count > 0:
+                logger.info(
+                    f"[{self.SOURCE_NAME}] {count} cookies chargés depuis {filepath}"
+                )
+                return True
+            else:
+                logger.warning(
+                    f"[{self.SOURCE_NAME}] Aucun cookie correspondant trouvé dans {filepath}"
+                )
+                return False
+        except Exception as e:
+            logger.warning(f"Erreur chargement cookies : {e}")
+            return False
 
     # ------------------------------------------------------------------
     # Authentification premium

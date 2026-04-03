@@ -1,0 +1,18 @@
+[
+  {
+    "name": "session_id",
+    "value": "abc123...",
+    "domain": ".cfnews.net",
+    "path": "/",
+    "secure": true,
+    "httpOnly": true
+  },
+  {
+    "name": "auth_token",
+    "value": "xyz789...",
+    "domain": ".businessimmo.com",
+    "path": "/",
+    "secure": true,
+    "httpOnly": true
+  }
+]

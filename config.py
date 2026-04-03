@@ -32,6 +32,8 @@ if HTTPS_PROXY:
 # --- Identifiants premium (CFNEWS Immo & Business Immo) ---
 PREMIUM_EMAIL = os.getenv("PREMIUM_EMAIL", "")
 PREMIUM_PASSWORD = os.getenv("PREMIUM_PASSWORD", "")
+# Fichier cookies exporté depuis Chrome/Firefox (méthode anti-bot la plus fiable)
+COOKIES_FILE = os.getenv("COOKIES_FILE", "")
 
 # --- Scrapers ---
 # Nombre max d'articles à récupérer par source
