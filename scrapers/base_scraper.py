@@ -113,7 +113,7 @@ class BaseScraper:
                 if not name or not value:
                     continue
                 # On ne charge que les cookies des domaines cibles
-                if any(d in domain for d in ["cfnews", "businessimmo"]):
+                if any(d in domain for d in ["cfnews", "cfnewsimmo", "businessimmo"]):
                     self.session.cookies.set(name, value, domain=domain)
                     count += 1
 
