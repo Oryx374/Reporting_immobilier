@@ -2,7 +2,6 @@ playwright==1.44.0
 feedparser==6.0.11           # optionnel — fallback sur stdlib xml si indisponible
 beautifulsoup4==4.12.3
 requests==2.32.3
-google-generativeai==0.7.2   # Gemini Flash (gratuit)
 anthropic==0.28.0            # optionnel — Claude (payant)
 python-dotenv==1.0.1
 schedule==1.2.2

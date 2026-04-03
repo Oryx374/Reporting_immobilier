@@ -110,19 +110,25 @@ class ReportSynthesizer:
     # ------------------------------------------------------------------
 
     def _call_gemini(self, prompt: str) -> str:
+        """Appel à Gemini Flash via l'API REST (pas de SDK requis)."""
         try:
-            import google.generativeai as genai
+            import requests as _requests
 
-            genai.configure(api_key=GEMINI_API_KEY)
-            model = genai.GenerativeModel(
-                model_name="gemini-1.5-flash",
-                system_instruction=SYSTEM_PROMPT,
+            url = (
+                "https://generativelanguage.googleapis.com/v1beta"
+                f"/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
             )
-            response = model.generate_content(prompt)
-            return response.text
+            payload = {
+                "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"maxOutputTokens": 4096, "temperature": 0.3},
+            }
+            resp = _requests.post(url, json=payload, timeout=60)
+            resp.raise_for_status()
+            data = resp.json()
+            return data["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as e:
             logger.error(f"Erreur Gemini : {e}")
-            # Bascule sur Claude si disponible
             if ANTHROPIC_API_KEY:
                 logger.info("Bascule sur Claude suite à erreur Gemini.")
                 return self._call_claude(prompt)
