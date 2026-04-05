@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Vanille de Madagascar – Gousses de vanille Bourbon pure, poudre et extraits artisanaux directement de Madagascar. Qualité premium, agriculture durable." />
-  <meta name="keywords" content="vanille Madagascar, vanille Bourbon, gousses de vanille, extrait de vanille, épices premium, vanille bio" />
+  <meta name="description" content="Vanille de Madagascar – Gousses, poudre et extraits de vanille Bourbon de qualité supérieure, cultivés durablement à Madagascar." />
+  <meta name="keywords" content="vanille Madagascar, vanille Bourbon, gousses de vanille, extrait de vanille, vanille bio, épices Madagascar" />
   <meta name="author" content="Vanille de Madagascar" />
-  <meta property="og:title" content="Vanille de Madagascar – Vanille Pure et Authentique" />
-  <meta property="og:description" content="Découvrez notre sélection de vanilles Bourbon de Madagascar, cultivées durablement et récoltées à la main." />
+  <meta property="og:title" content="Vanille de Madagascar – La Vanille Pure" />
+  <meta property="og:description" content="Découvrez nos vanilles Bourbon de Madagascar, cultivées durablement et sélectionnées avec soin." />
   <meta property="og:type" content="website" />
-  <title>Vanille de Madagascar – Vanille Pure et Authentique</title>
+  <title>Vanille de Madagascar – La Vanille Pure</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -17,15 +17,15 @@
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="navbar" id="navbar">
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#accueil" class="nav-logo">
         <span class="logo-icon">🌿</span>
         <span class="logo-text">Vanille de Madagascar</span>
       </a>
 
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" aria-label="Menu mobile" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -38,19 +38,24 @@
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
-      <button class="cart-btn" id="cart-btn" aria-label="Panier">
-        <span class="cart-icon">🛒</span>
+      <button class="cart-btn" id="cart-btn" aria-label="Ouvrir le panier">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
         <span class="cart-badge" id="cart-badge">0</span>
       </button>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="accueil">
     <div class="hero-bg">
       <div class="hero-shape hero-shape-1"></div>
       <div class="hero-shape hero-shape-2"></div>
       <div class="hero-shape hero-shape-3"></div>
+      <div class="hero-shape hero-shape-4"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content fade-in">
@@ -60,39 +65,64 @@
         Gousses Bourbon récoltées à la main, séchées naturellement et conditionnées avec soin pour vous offrir une vanille d'exception — riche, intense et authentique.
       </p>
       <div class="hero-actions">
-        <a href="#produits" class="btn btn-primary">Découvrir nos produits</a>
-        <a href="#histoire" class="btn btn-outline">Notre histoire</a>
+        <a href="#produits" class="btn btn-hero">Découvrir nos produits</a>
+        <a href="#histoire" class="btn btn-outline-hero">Notre histoire</a>
       </div>
-      <div class="hero-badges">
-        <span class="badge">🌱 Agriculture durable</span>
-        <span class="badge">✋ Récolte manuelle</span>
-        <span class="badge">🏅 Qualité Bourbon</span>
+      <div class="hero-trust-badges">
+        <span class="trust-badge">🌱 Agriculture durable</span>
+        <span class="trust-badge">✋ Récolte manuelle</span>
+        <span class="trust-badge">🏅 Qualité Bourbon</span>
       </div>
     </div>
-    <div class="hero-scroll-indicator">
-      <span></span>
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <div class="scroll-dot"></div>
     </div>
   </section>
 
-  <!-- PRODUITS -->
+  <!-- ===== BANDEAU AVANTAGES ===== -->
+  <div class="perks-bar">
+    <div class="perks-container">
+      <div class="perk-item">
+        <span>🌿</span>
+        <span>100&nbsp;% Naturel</span>
+      </div>
+      <div class="perk-divider"></div>
+      <div class="perk-item">
+        <span>✈️</span>
+        <span>Livraison rapide</span>
+      </div>
+      <div class="perk-divider"></div>
+      <div class="perk-item">
+        <span>🏆</span>
+        <span>Qualité Premium</span>
+      </div>
+      <div class="perk-divider"></div>
+      <div class="perk-item">
+        <span>🤝</span>
+        <span>Commerce Équitable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PRODUITS ===== -->
   <section class="section products-section" id="produits">
     <div class="container">
-      <div class="section-header fade-in">
-        <p class="section-label">Notre sélection</p>
+      <div class="section-header reveal">
+        <p class="section-label">Notre Sélection</p>
         <h2 class="section-title">Nos Produits</h2>
         <p class="section-subtitle">Une gamme complète pour tous les amateurs de vanille, du chef pâtissier à l'amateur éclairé.</p>
       </div>
 
       <div class="products-grid">
 
-        <article class="product-card fade-in" data-name="Gousses de Vanille Bourbon" data-price="18">
+        <article class="product-card reveal" data-name="Gousses de Vanille Bourbon" data-price="18">
           <div class="product-icon-wrap">
             <span class="product-icon">🌿</span>
           </div>
           <div class="product-body">
-            <span class="product-badge">Bestseller</span>
+            <span class="product-badge badge-bestseller">Bestseller</span>
             <h3 class="product-name">Gousses de Vanille Bourbon</h3>
-            <p class="product-weight">100g · ~10 gousses</p>
+            <p class="product-weight">100g &middot; ~10 gousses</p>
             <p class="product-desc">Nos gousses emblématiques de la variété Bourbon. Charnues, huileuses et parfumées, elles subliment toutes vos préparations sucrées.</p>
             <div class="product-footer">
               <span class="product-price">18 €</span>
@@ -101,14 +131,14 @@
           </div>
         </article>
 
-        <article class="product-card fade-in" data-name="Gousses de Vanille Premium" data-price="12">
-          <div class="product-icon-wrap product-icon-gold">
+        <article class="product-card reveal" data-name="Gousses de Vanille Premium" data-price="12">
+          <div class="product-icon-wrap icon-gold">
             <span class="product-icon">✨</span>
           </div>
           <div class="product-body">
-            <span class="product-badge product-badge-gold">Premium</span>
+            <span class="product-badge badge-gold">Premium</span>
             <h3 class="product-name">Gousses de Vanille Premium</h3>
-            <p class="product-weight">50g · ~5 gousses</p>
+            <p class="product-weight">50g &middot; ~5 gousses</p>
             <p class="product-desc">Sélectionnées parmi les plus belles gousses de la récolte. Longueur exceptionnelle et teneur en vanilline supérieure.</p>
             <div class="product-footer">
               <span class="product-price">12 €</span>
@@ -117,14 +147,14 @@
           </div>
         </article>
 
-        <article class="product-card fade-in" data-name="Poudre de Vanille Pure" data-price="9">
-          <div class="product-icon-wrap product-icon-rose">
+        <article class="product-card reveal" data-name="Poudre de Vanille Pure" data-price="9">
+          <div class="product-icon-wrap icon-rose">
             <span class="product-icon">🌸</span>
           </div>
           <div class="product-body">
             <h3 class="product-name">Poudre de Vanille Pure</h3>
             <p class="product-weight">30g</p>
-            <p class="product-desc">Gousses réduites en poudre fine, sans sucre ni additif. Idéale pour les pâtisseries, crèmes et smoothies.</p>
+            <p class="product-desc">Gousses réduites en poudre fine, sans sucre ni additif. Idéale pour les pâtisseries, crèmes glacées et smoothies.</p>
             <div class="product-footer">
               <span class="product-price">9 €</span>
               <button class="btn btn-add-cart" onclick="addToCart('Poudre de Vanille Pure', 9)">Ajouter au panier</button>
@@ -132,8 +162,8 @@
           </div>
         </article>
 
-        <article class="product-card fade-in" data-name="Extrait de Vanille" data-price="14">
-          <div class="product-icon-wrap product-icon-blue">
+        <article class="product-card reveal" data-name="Extrait de Vanille" data-price="14">
+          <div class="product-icon-wrap icon-blue">
             <span class="product-icon">💧</span>
           </div>
           <div class="product-body">
@@ -147,14 +177,14 @@
           </div>
         </article>
 
-        <article class="product-card fade-in" data-name="Vanille en Poudre Bio" data-price="11">
-          <div class="product-icon-wrap product-icon-green">
+        <article class="product-card reveal" data-name="Vanille en Poudre Bio" data-price="11">
+          <div class="product-icon-wrap icon-green">
             <span class="product-icon">🌱</span>
           </div>
           <div class="product-body">
-            <span class="product-badge product-badge-green">Bio</span>
+            <span class="product-badge badge-bio">Bio</span>
             <h3 class="product-name">Vanille en Poudre Bio</h3>
-            <p class="product-weight">50g</p>
+            <p class="product-weight">50g &middot; Certifiée AB</p>
             <p class="product-desc">Certifiée agriculture biologique. Cultivée sans intrant chimique dans les forêts ombragées du nord-est de Madagascar.</p>
             <div class="product-footer">
               <span class="product-price">11 €</span>
@@ -163,14 +193,14 @@
           </div>
         </article>
 
-        <article class="product-card fade-in" data-name="Lot Découverte" data-price="35">
-          <div class="product-icon-wrap product-icon-purple">
+        <article class="product-card reveal" data-name="Lot Découverte" data-price="35">
+          <div class="product-icon-wrap icon-purple">
             <span class="product-icon">🎁</span>
           </div>
           <div class="product-body">
-            <span class="product-badge product-badge-purple">Idée cadeau</span>
+            <span class="product-badge badge-gift">Idée cadeau</span>
             <h3 class="product-name">Lot Découverte</h3>
-            <p class="product-weight">Assortiment · 5 produits</p>
+            <p class="product-weight">Assortiment &middot; 5 produits</p>
             <p class="product-desc">Le coffret idéal pour découvrir toute notre gamme : gousses Bourbon, poudre, extrait et vanille bio réunis dans un bel écrin.</p>
             <div class="product-footer">
               <span class="product-price">35 €</span>
@@ -183,33 +213,34 @@
     </div>
   </section>
 
-  <!-- NOTRE HISTOIRE -->
+  <!-- ===== NOTRE HISTOIRE ===== -->
   <section class="section story-section" id="histoire">
     <div class="container">
       <div class="story-grid">
-        <div class="story-visual fade-in">
+
+        <div class="story-visual reveal">
           <div class="story-illustration">
             <div class="story-shape story-shape-1"></div>
             <div class="story-shape story-shape-2"></div>
             <div class="story-center-icon">🌿</div>
           </div>
           <div class="story-stats">
-            <div class="stat">
-              <span class="stat-num">15+</span>
+            <div class="stat-item">
+              <span class="stat-number">15+</span>
               <span class="stat-label">ans d'expérience</span>
             </div>
-            <div class="stat">
-              <span class="stat-num">200+</span>
+            <div class="stat-item">
+              <span class="stat-number">200+</span>
               <span class="stat-label">familles partenaires</span>
             </div>
-            <div class="stat">
-              <span class="stat-num">100%</span>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
               <span class="stat-label">origine garantie</span>
             </div>
           </div>
         </div>
 
-        <div class="story-content fade-in">
+        <div class="story-content reveal">
           <p class="section-label">Notre Histoire</p>
           <h2 class="section-title story-title">De Madagascar à votre cuisine</h2>
           <p class="story-text">
@@ -245,22 +276,23 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- TEMOIGNAGES -->
+  <!-- ===== TEMOIGNAGES ===== -->
   <section class="section testimonials-section">
     <div class="container">
-      <div class="section-header fade-in">
+      <div class="section-header reveal">
         <p class="section-label">Ce qu'ils disent</p>
         <h2 class="section-title">Avis Clients</h2>
       </div>
       <div class="testimonials-grid">
 
-        <div class="testimonial-card fade-in">
+        <div class="testimonial-card reveal">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Une vanille absolument exceptionnelle. Le parfum qui s'échappe dès l'ouverture du sachet est incomparable. Mes crèmes brûlées n'ont jamais été aussi bonnes. Je ne pourrai plus me passer de cette qualité !"</p>
+          <blockquote class="testimonial-text">"Une vanille absolument exceptionnelle. Le parfum qui s'échappe dès l'ouverture du sachet est incomparable. Mes crèmes brûlées n'ont jamais été aussi bonnes. Je ne pourrai plus me passer de cette qualité !"</blockquote>
           <div class="testimonial-author">
             <div class="author-avatar">ML</div>
             <div>
@@ -270,9 +302,9 @@
           </div>
         </div>
 
-        <div class="testimonial-card fade-in">
+        <div class="testimonial-card reveal">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"J'utilise la vanille de Madagascar depuis 3 ans dans mon restaurant. La régularité de la qualité et la générosité des gousses sont au rendez-vous. Mes clients le remarquent, et mes desserts s'en trouvent sublimés à chaque service."</p>
+          <blockquote class="testimonial-text">"J'utilise la vanille de Madagascar depuis 3 ans dans mon restaurant. La régularité de la qualité et la générosité des gousses sont au rendez-vous. Mes clients le remarquent, et mes desserts s'en trouvent sublimés à chaque service."</blockquote>
           <div class="testimonial-author">
             <div class="author-avatar">TC</div>
             <div>
@@ -282,9 +314,9 @@
           </div>
         </div>
 
-        <div class="testimonial-card fade-in">
+        <div class="testimonial-card reveal">
           <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"J'ai offert le Lot Découverte à ma mère pour Noël et ce fut un cadeau parfait. L'emballage est soigné, la qualité exemplaire. Elle m'a déjà demandé d'en recommander ! Service client réactif et livraison rapide. Bravo !"</p>
+          <blockquote class="testimonial-text">"J'ai offert le Lot Découverte à ma mère pour Noël et ce fut un cadeau parfait. L'emballage est soigné, la qualité exemplaire. Elle m'a déjà demandé d'en recommander ! Service client réactif et livraison rapide. Bravo !"</blockquote>
           <div class="testimonial-author">
             <div class="author-avatar">SR</div>
             <div>
@@ -298,13 +330,14 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ===== CONTACT ===== -->
   <section class="section contact-section" id="contact">
     <div class="container">
       <div class="contact-grid">
-        <div class="contact-info fade-in">
+
+        <div class="contact-info reveal">
           <p class="section-label">Nous contacter</p>
-          <h2 class="section-title contact-title">Une question ? Un projet ?</h2>
+          <h2 class="section-title contact-title">Une question ?<br>Un projet ?</h2>
           <p class="contact-desc">Notre équipe est à votre disposition pour répondre à toutes vos questions, que ce soit pour une commande personnelle, un achat en gros ou un partenariat professionnel.</p>
           <div class="contact-details">
             <div class="contact-detail">
@@ -338,7 +371,7 @@
           </div>
         </div>
 
-        <div class="contact-form-wrap fade-in">
+        <div class="contact-form-wrap reveal">
           <form class="contact-form" id="contact-form" novalidate>
             <div class="form-row">
               <div class="form-group">
@@ -362,19 +395,21 @@
               <span class="form-error" id="message-error"></span>
             </div>
             <button type="submit" class="btn btn-primary btn-full">Envoyer le message</button>
-            <div class="form-success" id="form-success">
-              <span>✅ Merci ! Votre message a bien été envoyé. Nous vous répondrons dans les 24h.</span>
+            <div class="form-success" id="form-success" hidden>
+              ✅ Merci ! Votre message a bien été envoyé. Nous vous répondrons dans les 24h.
             </div>
           </form>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
+
         <div class="footer-brand">
           <a href="#accueil" class="nav-logo footer-logo">
             <span class="logo-icon">🌿</span>
@@ -383,13 +418,13 @@
           <p class="footer-tagline">L'authenticité malgache dans chaque gousse.</p>
           <div class="footer-social">
             <a href="#" class="social-link" aria-label="Instagram">
-              <span>📸</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
             </a>
             <a href="#" class="social-link" aria-label="Facebook">
-              <span>👥</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
             </a>
             <a href="#" class="social-link" aria-label="Pinterest">
-              <span>📌</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
             </a>
           </div>
         </div>
@@ -421,10 +456,11 @@
             <li><a href="#">Mentions légales</a></li>
             <li><a href="#">Politique de confidentialité</a></li>
             <li><a href="#">CGV</a></li>
-            <li><a href="#">Livraison & retours</a></li>
+            <li><a href="#">Livraison &amp; retours</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
         </div>
+
       </div>
 
       <div class="footer-bottom">
@@ -434,31 +470,34 @@
     </div>
   </footer>
 
-  <!-- CART MODAL -->
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Panier">
+  <!-- ===== CART SIDEBAR ===== -->
+  <div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Panier" aria-modal="true" aria-hidden="true">
     <div class="cart-header">
-      <h2 class="cart-title">🛒 Mon Panier</h2>
-      <button class="cart-close" id="cart-close" aria-label="Fermer le panier">✕</button>
+      <h2 class="cart-title">Mon Panier</h2>
+      <button class="cart-close" id="cart-close" aria-label="Fermer le panier">&times;</button>
     </div>
     <div class="cart-items" id="cart-items">
       <div class="cart-empty" id="cart-empty">
-        <span>🛒</span>
+        <span class="cart-empty-icon">🛒</span>
         <p>Votre panier est vide.</p>
-        <a href="#produits" class="btn btn-outline btn-sm cart-cta-empty">Voir les produits</a>
+        <button class="btn btn-outline-brown btn-sm" id="cart-shop-link">Voir les produits</button>
       </div>
     </div>
-    <div class="cart-footer" id="cart-footer">
+    <div class="cart-footer" id="cart-footer" hidden>
       <div class="cart-total-line">
         <span>Total</span>
         <span class="cart-total-amount" id="cart-total">0 €</span>
       </div>
       <button class="btn btn-primary btn-full" id="checkout-btn">Passer commande</button>
-      <div class="cart-success" id="cart-success">
-        <span>🎉 Commande passée avec succès ! Merci pour votre achat.</span>
+      <div class="cart-success" id="cart-success" hidden>
+        🎉 Commande passée avec succès ! Merci pour votre achat.
       </div>
     </div>
   </aside>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="script.js"></script>
 </body>
