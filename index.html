@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vanille de Madagascar – Gousses de vanille Bourbon pure, poudre et extraits artisanaux directement de Madagascar. Qualité premium, agriculture durable." />
+  <meta name="keywords" content="vanille Madagascar, vanille Bourbon, gousses de vanille, extrait de vanille, épices premium, vanille bio" />
+  <meta name="author" content="Vanille de Madagascar" />
+  <meta property="og:title" content="Vanille de Madagascar – Vanille Pure et Authentique" />
+  <meta property="og:description" content="Découvrez notre sélection de vanilles Bourbon de Madagascar, cultivées durablement et récoltées à la main." />
+  <meta property="og:type" content="website" />
+  <title>Vanille de Madagascar – Vanille Pure et Authentique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#accueil" class="nav-logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">Vanille de Madagascar</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#accueil" class="nav-link">Accueil</a></li>
+        <li><a href="#produits" class="nav-link">Produits</a></li>
+        <li><a href="#histoire" class="nav-link">Notre Histoire</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="cart-btn" id="cart-btn" aria-label="Panier">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-bg">
+      <div class="hero-shape hero-shape-1"></div>
+      <div class="hero-shape hero-shape-2"></div>
+      <div class="hero-shape hero-shape-3"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade-in">
+      <p class="hero-tagline">Directement depuis l'île Rouge</p>
+      <h1 class="hero-title">La Vanille Pure<br /><em>de Madagascar</em></h1>
+      <p class="hero-subtitle">
+        Gousses Bourbon récoltées à la main, séchées naturellement et conditionnées avec soin pour vous offrir une vanille d'exception — riche, intense et authentique.
+      </p>
+      <div class="hero-actions">
+        <a href="#produits" class="btn btn-primary">Découvrir nos produits</a>
+        <a href="#histoire" class="btn btn-outline">Notre histoire</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">🌱 Agriculture durable</span>
+        <span class="badge">✋ Récolte manuelle</span>
+        <span class="badge">🏅 Qualité Bourbon</span>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- PRODUITS -->
+  <section class="section products-section" id="produits">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="section-label">Notre sélection</p>
+        <h2 class="section-title">Nos Produits</h2>
+        <p class="section-subtitle">Une gamme complète pour tous les amateurs de vanille, du chef pâtissier à l'amateur éclairé.</p>
+      </div>
+
+      <div class="products-grid">
+
+        <article class="product-card fade-in" data-name="Gousses de Vanille Bourbon" data-price="18">
+          <div class="product-icon-wrap">
+            <span class="product-icon">🌿</span>
+          </div>
+          <div class="product-body">
+            <span class="product-badge">Bestseller</span>
+            <h3 class="product-name">Gousses de Vanille Bourbon</h3>
+            <p class="product-weight">100g · ~10 gousses</p>
+            <p class="product-desc">Nos gousses emblématiques de la variété Bourbon. Charnues, huileuses et parfumées, elles subliment toutes vos préparations sucrées.</p>
+            <div class="product-footer">
+              <span class="product-price">18 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Gousses de Vanille Bourbon', 18)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card fade-in" data-name="Gousses de Vanille Premium" data-price="12">
+          <div class="product-icon-wrap product-icon-gold">
+            <span class="product-icon">✨</span>
+          </div>
+          <div class="product-body">
+            <span class="product-badge product-badge-gold">Premium</span>
+            <h3 class="product-name">Gousses de Vanille Premium</h3>
+            <p class="product-weight">50g · ~5 gousses</p>
+            <p class="product-desc">Sélectionnées parmi les plus belles gousses de la récolte. Longueur exceptionnelle et teneur en vanilline supérieure.</p>
+            <div class="product-footer">
+              <span class="product-price">12 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Gousses de Vanille Premium', 12)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card fade-in" data-name="Poudre de Vanille Pure" data-price="9">
+          <div class="product-icon-wrap product-icon-rose">
+            <span class="product-icon">🌸</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Poudre de Vanille Pure</h3>
+            <p class="product-weight">30g</p>
+            <p class="product-desc">Gousses réduites en poudre fine, sans sucre ni additif. Idéale pour les pâtisseries, crèmes et smoothies.</p>
+            <div class="product-footer">
+              <span class="product-price">9 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Poudre de Vanille Pure', 9)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card fade-in" data-name="Extrait de Vanille" data-price="14">
+          <div class="product-icon-wrap product-icon-blue">
+            <span class="product-icon">💧</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Extrait de Vanille</h3>
+            <p class="product-weight">100ml</p>
+            <p class="product-desc">Macération longue de gousses dans de l'alcool de canne. Un extrait concentré au goût profond et persistant.</p>
+            <div class="product-footer">
+              <span class="product-price">14 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Extrait de Vanille', 14)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card fade-in" data-name="Vanille en Poudre Bio" data-price="11">
+          <div class="product-icon-wrap product-icon-green">
+            <span class="product-icon">🌱</span>
+          </div>
+          <div class="product-body">
+            <span class="product-badge product-badge-green">Bio</span>
+            <h3 class="product-name">Vanille en Poudre Bio</h3>
+            <p class="product-weight">50g</p>
+            <p class="product-desc">Certifiée agriculture biologique. Cultivée sans intrant chimique dans les forêts ombragées du nord-est de Madagascar.</p>
+            <div class="product-footer">
+              <span class="product-price">11 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Vanille en Poudre Bio', 11)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card fade-in" data-name="Lot Découverte" data-price="35">
+          <div class="product-icon-wrap product-icon-purple">
+            <span class="product-icon">🎁</span>
+          </div>
+          <div class="product-body">
+            <span class="product-badge product-badge-purple">Idée cadeau</span>
+            <h3 class="product-name">Lot Découverte</h3>
+            <p class="product-weight">Assortiment · 5 produits</p>
+            <p class="product-desc">Le coffret idéal pour découvrir toute notre gamme : gousses Bourbon, poudre, extrait et vanille bio réunis dans un bel écrin.</p>
+            <div class="product-footer">
+              <span class="product-price">35 €</span>
+              <button class="btn btn-add-cart" onclick="addToCart('Lot Découverte', 35)">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTRE HISTOIRE -->
+  <section class="section story-section" id="histoire">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-visual fade-in">
+          <div class="story-illustration">
+            <div class="story-shape story-shape-1"></div>
+            <div class="story-shape story-shape-2"></div>
+            <div class="story-center-icon">🌿</div>
+          </div>
+          <div class="story-stats">
+            <div class="stat">
+              <span class="stat-num">15+</span>
+              <span class="stat-label">ans d'expérience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">200+</span>
+              <span class="stat-label">familles partenaires</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">origine garantie</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-content fade-in">
+          <p class="section-label">Notre Histoire</p>
+          <h2 class="section-title story-title">De Madagascar à votre cuisine</h2>
+          <p class="story-text">
+            Tout a commencé sur les côtes du nord-est de Madagascar, dans la région de Sava — berceau mondial de la vanille Bourbon. Séduits par la richesse aromatique unique de cette épice, nous avons noué des partenariats directs avec les producteurs locaux pour vous apporter la vanille la plus authentique qui soit.
+          </p>
+          <p class="story-text">
+            La vanille Bourbon de Madagascar est reconnue dans le monde entier pour sa teneur exceptionnelle en vanilline, son profil aromatique crémeux et boisé, et ses notes de figue et de raisin sec. Chaque gousse est pollinisée à la main, récoltée au pic de maturité, puis soumise à un long processus de séchage artisanal de plusieurs semaines.
+          </p>
+          <p class="story-text">
+            Nous travaillons en agriculture durable et raisonnée, dans le respect des forêts tropicales et des communautés villageoises. Chaque achat contribue directement à la rémunération équitable des agriculteurs et à la préservation des écosystèmes locaux.
+          </p>
+          <div class="story-values">
+            <div class="value-item">
+              <span class="value-icon">🌿</span>
+              <div>
+                <strong>Durabilité</strong>
+                <p>Agriculture respectueuse de l'environnement</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon">🤝</span>
+              <div>
+                <strong>Commerce équitable</strong>
+                <p>Prix justes pour les producteurs</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon">🏅</span>
+              <div>
+                <strong>Qualité supérieure</strong>
+                <p>Sélection rigoureuse à chaque récolte</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="section-label">Ce qu'ils disent</p>
+        <h2 class="section-title">Avis Clients</h2>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Une vanille absolument exceptionnelle. Le parfum qui s'échappe dès l'ouverture du sachet est incomparable. Mes crèmes brûlées n'ont jamais été aussi bonnes. Je ne pourrai plus me passer de cette qualité !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ML</div>
+            <div>
+              <strong>Marie-Laure D.</strong>
+              <span>Pâtissière amateur, Lyon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"J'utilise la vanille de Madagascar depuis 3 ans dans mon restaurant. La régularité de la qualité et la générosité des gousses sont au rendez-vous. Mes clients le remarquent, et mes desserts s'en trouvent sublimés à chaque service."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">TC</div>
+            <div>
+              <strong>Thomas C.</strong>
+              <span>Chef pâtissier, Paris</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"J'ai offert le Lot Découverte à ma mère pour Noël et ce fut un cadeau parfait. L'emballage est soigné, la qualité exemplaire. Elle m'a déjà demandé d'en recommander ! Service client réactif et livraison rapide. Bravo !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SR</div>
+            <div>
+              <strong>Sophie R.</strong>
+              <span>Cliente fidèle, Bordeaux</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <p class="section-label">Nous contacter</p>
+          <h2 class="section-title contact-title">Une question ? Un projet ?</h2>
+          <p class="contact-desc">Notre équipe est à votre disposition pour répondre à toutes vos questions, que ce soit pour une commande personnelle, un achat en gros ou un partenariat professionnel.</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="contact-detail-icon">📍</span>
+              <div>
+                <strong>Adresse</strong>
+                <p>12 rue des Épices, 75001 Paris, France</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-icon">📞</span>
+              <div>
+                <strong>Téléphone</strong>
+                <p>+33 (0)1 23 45 67 89</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-icon">✉️</span>
+              <div>
+                <strong>Email</strong>
+                <p>bonjour@vanillemadagascar.fr</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-icon">🕐</span>
+              <div>
+                <strong>Horaires</strong>
+                <p>Lun–Ven, 9h–18h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap fade-in">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Nom complet <span class="required">*</span></label>
+                <input type="text" id="name" name="name" placeholder="Marie Dupont" required />
+                <span class="form-error" id="name-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="email">Adresse email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="marie@exemple.fr" required />
+                <span class="form-error" id="email-error"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78" />
+            </div>
+            <div class="form-group">
+              <label for="message">Votre message <span class="required">*</span></label>
+              <textarea id="message" name="message" rows="5" placeholder="Bonjour, je souhaite..." required></textarea>
+              <span class="form-error" id="message-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Envoyer le message</button>
+            <div class="form-success" id="form-success">
+              <span>✅ Merci ! Votre message a bien été envoyé. Nous vous répondrons dans les 24h.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#accueil" class="nav-logo footer-logo">
+            <span class="logo-icon">🌿</span>
+            <span class="logo-text">Vanille de Madagascar</span>
+          </a>
+          <p class="footer-tagline">L'authenticité malgache dans chaque gousse.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <span>📸</span>
+            </a>
+            <a href="#" class="social-link" aria-label="Facebook">
+              <span>👥</span>
+            </a>
+            <a href="#" class="social-link" aria-label="Pinterest">
+              <span>📌</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#produits">Produits</a></li>
+            <li><a href="#histoire">Notre Histoire</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Produits</h4>
+          <ul class="footer-links">
+            <li><a href="#produits">Gousses Bourbon</a></li>
+            <li><a href="#produits">Gousses Premium</a></li>
+            <li><a href="#produits">Poudre de Vanille</a></li>
+            <li><a href="#produits">Extrait de Vanille</a></li>
+            <li><a href="#produits">Lot Découverte</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Informations</h4>
+          <ul class="footer-links">
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="#">CGV</a></li>
+            <li><a href="#">Livraison & retours</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Vanille de Madagascar. Tous droits réservés.</p>
+        <p class="footer-credits">Produit directement importé de Madagascar 🇲🇬</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Panier">
+    <div class="cart-header">
+      <h2 class="cart-title">🛒 Mon Panier</h2>
+      <button class="cart-close" id="cart-close" aria-label="Fermer le panier">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty" id="cart-empty">
+        <span>🛒</span>
+        <p>Votre panier est vide.</p>
+        <a href="#produits" class="btn btn-outline btn-sm cart-cta-empty">Voir les produits</a>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-total-line">
+        <span>Total</span>
+        <span class="cart-total-amount" id="cart-total">0 €</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="checkout-btn">Passer commande</button>
+      <div class="cart-success" id="cart-success">
+        <span>🎉 Commande passée avec succès ! Merci pour votre achat.</span>
+      </div>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
